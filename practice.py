@@ -14,7 +14,7 @@ import time
 # ser = serial.Serial("/dev/ttyAMA2",115200) #when using the rasberry pi 4B uart3
 # ser = serial.Serial("/dev/ttyAMA3",115200) #when using the rasberry pi 4B uart4
 # ser = serial.Serial("/dev/ttyAMA4",115200) #when using the rasberry pi 4B uart5
-ser = Serial('COM4', 115200)  # when using the Window Desktop
+ser = Serial('COM6', 115200)  # when using the Window Desktop
 
 
 # buffer for (Producer Consumer Model)
@@ -66,7 +66,8 @@ def Uart_output():
     while True:
         data = input()
         byte_data = bytes(data, 'utf-8')
-        ser.write(byte_data)
+        ser.write(b'[1,300]')
+#        ser.write(byte_data)
         print(byte_data)
 
 
