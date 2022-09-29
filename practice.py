@@ -14,7 +14,7 @@ import time
 # ser = serial.Serial("/dev/ttyAMA2",115200) #when using the rasberry pi 4B uart3
 # ser = serial.Serial("/dev/ttyAMA3",115200) #when using the rasberry pi 4B uart4
 # ser = serial.Serial("/dev/ttyAMA4",115200) #when using the rasberry pi 4B uart5
-ser = Serial('COM6', 115200)  # when using the Window Desktop
+ser = Serial('COM4', 115200)  # when using the Window Desktop
 
 
 # buffer for (Producer Consumer Model)
@@ -50,6 +50,20 @@ def Uart_input():
             except:
                 pass
 
+            # if odo_list[1] != 0 is the sonic detect the object
+            if odo_list:
+                if odo_list[1] != 0:
+
+                    sum = int(odo_list[3])*1000
+                    sum += int(odo_list[4])*100
+                    sum += int(odo_list[5])*10
+                    sum += int(odo_list[6])*1
+                    temp_sum = '[3, {:04d}]'.format(sum)
+                    return_sum = bytes(temp_sum, 'utf-8')
+                    ser.write(return_sum)
+                    print(return_sum)
+
+            init_odo()
             print(odo_list)
 
     except KeyboardInterrupt:
@@ -66,9 +80,11 @@ def Uart_output():
     while True:
         data = input()
         byte_data = bytes(data, 'utf-8')
-        ser.write(b'[1,300]')
+        temp_data = b'[1,0450]'
 #        ser.write(byte_data)
-        print(byte_data)
+        ser.write(temp_data)
+
+        print(temp_data)
 
 
 if __name__ == "__main__":
