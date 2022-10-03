@@ -5,6 +5,8 @@
 
 from serial import Serial
 from threading import Thread
+import cv2
+import numpy as np
 import time
 
 # ser = serial.Serial("/dev/ttyS0",9600, timeout=1.0)
@@ -14,7 +16,7 @@ import time
 # ser = serial.Serial("/dev/ttyAMA2",115200) #when using the rasberry pi 4B uart3
 # ser = serial.Serial("/dev/ttyAMA3",115200) #when using the rasberry pi 4B uart4
 # ser = serial.Serial("/dev/ttyAMA4",115200) #when using the rasberry pi 4B uart5
-ser = Serial('COM4', 115200)  # when using the Window Desktop
+ser = Serial('COM3', 115200)  # when using the Window Desktop
 
 
 # buffer for (Producer Consumer Model)
@@ -35,7 +37,7 @@ def Uart_input():
             serial_data = ser.read()  # stm32 give odo data to the rasberry use the uart
             data_uart = serial_data.decode("utf-8")
             # when using this code block the sleep (because sleep is onlt use for the testing)
-            time.sleep(0.1)
+            # time.sleep(0.1)
 
             # makelist Buffer
             try:

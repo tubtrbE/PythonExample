@@ -1,5 +1,11 @@
-sum = 300
-temp_sum = '[3, {:04d}]'.format(sum)
-return_sum = bytes(temp_sum, 'utf-8')
-ser.write(return_sum)
-print(byte)
+import cv2
+import numpy as np
+
+img = np.zeros((600, 800, 3), np.uint8)
+
+print(img[:10])
+print(len(img))
+
+cv2.imshow("image", img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
